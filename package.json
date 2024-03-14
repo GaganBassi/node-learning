@@ -14,7 +14,10 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GaganBassi/node-codeStepByStep/issues"
+    "url": "https://github.com/GaganBassi/node-learning"
   },
-  "homepage": "https://github.com/GaganBassi/node-codeStepByStep#readme"
+  "homepage": "https://github.com/GaganBassi/node-codeStepByStep#readme",
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
 }
