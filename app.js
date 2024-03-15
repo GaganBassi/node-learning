@@ -30,3 +30,5 @@ fs.writeFileSync(dirPath+"/abc.txt","This is abc");
 fs.readdir(dirPath,(err,files)=>{
     console.log(files);//it will give array of all the files list in Data folder
 })
+
+
