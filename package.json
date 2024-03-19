@@ -1,25 +1,55 @@
 {
   
   "name": "learning",
+  
   "version": "1.0.0",
+  
   "description": "Learning node.js from code step by step",
+  
   "main": "index.js",
+  
   "type": "commonjs",
+  
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+  
+    
+  "test": "echo \"Error: no test specified\" && exit 1",
+  
+    
+  "start": "node server.js"
+  
   },
+  
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GaganBassi/node-codeStepByStep.git"
+  
+    
+  "type": "git",
+  
+    
+  "url": "git+https://github.com/GaganBassi/node-codeStepByStep.git"
+  
   },
+  
   "author": "",
+  
   "license": "ISC",
+  
   "bugs": {
-    "url": "https://github.com/GaganBassi/node-learning"
+  
+    
+  "url": "https://github.com/GaganBassi/node-learning"
+  
   },
+  
   "homepage": "https://github.com/GaganBassi/node-codeStepByStep#readme",
+  
   "dependencies": {
-    "colors": "^1.4.0"
+  
+    
+  "colors": "^1.4.0",
+  
+    
+  "express": "^4.18.3"
+  
   }
 }
