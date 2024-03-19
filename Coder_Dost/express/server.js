@@ -2,6 +2,12 @@ const express=require('express');
 
 const app=express();
 
+//Creation of middleware between client and server.
+app.use((req,res,next)=>{
+    console.log(req.method,req.ip, req.hostname,new Date, req.get('User-Agent'));
+next();//here next means request can move down from this middleware
+})
+//Express code/routes run from top to bottom.
 app.get('/',(req,res)=>{
     
     res.json({'type':'Get'});
@@ -11,6 +17,9 @@ app.get('/',(req,res)=>{
 })
 
 //To use these operations, use either thunderclient or postman.
+
+
+//These are called API-Endpoints-route
 app.post('/',(req,res)=>{
     res.json({'type':'Post'});
 });
