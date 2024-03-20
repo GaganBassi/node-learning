@@ -2,8 +2,9 @@ const express=require('express');
 
 const app=express();
 
+//app.use() will execute before every request.
 //Creation of middleware between client and server.
-app.use((req,res,next)=>{
+/**app.use((req,res,next)=>{
     console.log(req.method,req.ip, req.hostname,new Date, req.get('User-Agent'));
     if(req.query.pass==='123'){
         next();
@@ -12,7 +13,20 @@ app.use((req,res,next)=>{
         res.sendStatus(404);
     }
 //next();//here next means request can move down from this middleware
-})
+})**/
+
+const auth=(req,res,next)=>{
+    console.log(req.method,req.ip, req.hostname,new Date, req.get('User-Agent'));
+    if(req.query.pass==='123'){
+        next();
+    }
+    else{
+        res.sendStatus(404);
+    }
+//next();//here next means request can move down from this middleware
+}
+app.use(auth);//Other way to execute middleware.
+
 //Express code/routes run from top to bottom.
 app.get('/',(req,res)=>{
     //console.log(req.query);
