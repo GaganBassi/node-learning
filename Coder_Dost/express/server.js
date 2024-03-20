@@ -82,7 +82,11 @@ app.post('/form',authPost,(req,res)=>{
     console.log(req.body);
     res.send('Hell');
 })
+app.get('/form/:id',(req,res)=>{//To get the url variable
+    console.log(req.params);
+    res.send(req.params);
+    })
 //app.listen should be at the end.
-app.listen(8002,()=>{
+app.listen(8001,()=>{
     console.log('Server Started');
 });
