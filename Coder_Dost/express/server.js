@@ -96,23 +96,20 @@ app.get('/form/:id',(req,res)=>{//To get the url variable
 
 //CRUD operation in REST API
 
-//Creation of REST API
+const createProduct=(req,res)=>{
+    console.log(req.body);
+    dataArr.push(req.body);
+    console.log("Json dataArr Data is coming up");
+    console.log(dataArr);
+        res.json({"type":"Post"});
+    }
 
-app.post('/products',(req,res)=>{
-console.log(req.body);
-dataArr.push(req.body);
-console.log("Json dataArr Data is coming up");
-console.log(dataArr);
-    res.json({"type":"Post"});
-})
-
-//Get Request
-app.get('/products/view',(req,res)=>{
+const getProduct=(req,res)=>{
     res.json(dataArr);
-})
+}
 
-//Update Request
-app.put('/products/:id',(req,res)=>{
+const replaceProduct=(req,res)=>{
+    //PUT
     const id=parseInt(req.params['id']);
     console.log("id",id);
    const index=dataArr.findIndex((i)=>i.id===id);
@@ -121,10 +118,10 @@ dataArr.splice(index,1,{...req.body,'id':id});
 res.status(201).json(dataArr);
 
 
-})
-//The only difference between put and patch is put override all the element but patch updates the selected and also keep the
-//old values or properties.
-app.patch('/products/:id',(req,res)=>{
+}
+
+const updateProduct=(req,res)=>{
+    //PATCH
     const id=parseInt(req.params['id']);
     console.log("id",id);
    const index=dataArr.findIndex((i)=>i.id===id);
@@ -134,11 +131,8 @@ dataArr.splice(index,1,{...element,...req.body});//here properties which repeats
 res.status(201).json(dataArr);
 
 
-})
-
-//DELETE
-
-app.delete('/products/:id',(req,res)=>{
+}
+const deleteProduct=(req,res)=>{
     const id=parseInt(req.params['id']);
     console.log(req.params);
     console.log("id",id);
@@ -146,7 +140,23 @@ app.delete('/products/:id',(req,res)=>{
     console.log(index);
     dataArr.splice(index,1);
     res.status(201).send('Deleted');
-})
+}
+//Creation of REST API
+
+app.post('/products',createProduct);
+
+//Get Request
+app.get('/products/view',getProduct);
+
+//Update Request
+app.put('/products/:id',replaceProduct)
+//The only difference between put and patch is put override all the element but patch updates the selected and also keep the
+//old values or properties.
+app.patch('/products/:id', updateProduct)
+
+//DELETE
+
+app.delete('/products/:id', deleteProduct);
 
 
 
