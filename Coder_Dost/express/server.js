@@ -106,6 +106,50 @@ console.log(dataArr);
     res.json({"type":"Post"});
 })
 
+//Get Request
+app.get('/products/view',(req,res)=>{
+    res.json(dataArr);
+})
+
+//Update Request
+app.put('/products/:id',(req,res)=>{
+    const id=parseInt(req.params['id']);
+    console.log("id",id);
+   const index=dataArr.findIndex((i)=>i.id===id);
+    console.log(index);
+dataArr.splice(index,1,{...req.body,'id':id});
+res.status(201).json(dataArr);
+
+
+})
+//The only difference between put and patch is put override all the element but patch updates the selected and also keep the
+//old values or properties.
+app.patch('/products/:id',(req,res)=>{
+    const id=parseInt(req.params['id']);
+    console.log("id",id);
+   const index=dataArr.findIndex((i)=>i.id===id);
+    console.log(index);
+    const element=dataArr[index];
+dataArr.splice(index,1,{...element,...req.body});//here properties which repeats in element by req.body will be override
+res.status(201).json(dataArr);
+
+
+})
+
+//DELETE
+
+app.delete('/products/:id',(req,res)=>{
+    const id=parseInt(req.params['id']);
+    console.log(req.params);
+    console.log("id",id);
+   const index=dataArr.findIndex((i)=>i.id===id);
+    console.log(index);
+    dataArr.splice(index,1);
+    res.status(201).send('Deleted');
+})
+
+
+
 //app.listen should be at the end.
 app.listen(8007,()=>{
     console.log('Server Started');
