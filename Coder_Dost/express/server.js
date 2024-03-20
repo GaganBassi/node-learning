@@ -17,8 +17,10 @@ const data2=fs.readFileSync('index.html','utf-8');
 //next();//here next means request can move down from this middleware
 })**/
 
+//express.static('public');
+
 //express.json() is a middleware
-app.use(express.json());//Express will read the body of the request, otherwise req.body will not work.
+app.use(express.json());//Express will read the body of the request of type json, otherwise req.body will not work.
 app.use(express.urlencoded({ extended: true }));//To fetch post data from form
 const authPost=(req,res,next)=>{//Actual creation of middleware
     console.log(req.method,req.ip, req.hostname,new Date, req.get('User-Agent'));
