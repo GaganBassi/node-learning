@@ -5,15 +5,22 @@ const app=express();
 //Creation of middleware between client and server.
 app.use((req,res,next)=>{
     console.log(req.method,req.ip, req.hostname,new Date, req.get('User-Agent'));
-next();//here next means request can move down from this middleware
+    if(req.query.pass==='123'){
+        next();
+    }
+    else{
+        res.sendStatus(404);
+    }
+//next();//here next means request can move down from this middleware
 })
 //Express code/routes run from top to bottom.
 app.get('/',(req,res)=>{
-    
+    //console.log(req.query);
     res.json({'type':'Get'});
     //res.send(' <h1>First Server</h1>');
     //res.status(201).send('')//To send status along with this.
     //res.sendStatus(404);
+    
 })
 
 //To use these operations, use either thunderclient or postman.
