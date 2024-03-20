@@ -15,7 +15,7 @@ const app=express();
 //next();//here next means request can move down from this middleware
 })**/
 
-const auth=(req,res,next)=>{
+const auth=(req,res,next)=>{//Actual creation of middleware
     console.log(req.method,req.ip, req.hostname,new Date, req.get('User-Agent'));
     if(req.query.pass==='123'){
         next();
@@ -25,10 +25,10 @@ const auth=(req,res,next)=>{
     }
 //next();//here next means request can move down from this middleware
 }
-app.use(auth);//Other way to execute middleware.
+//app.use(auth);//Other way to execute middleware.
 
 //Express code/routes run from top to bottom.
-app.get('/',(req,res)=>{
+app.get('/',auth,(req,res)=>{//Now only this get method has the auth middleware for other requests it will not work.
     //console.log(req.query);
     res.json({'type':'Get'});
     //res.send(' <h1>First Server</h1>');
@@ -41,7 +41,7 @@ app.get('/',(req,res)=>{
 
 
 //These are called API-Endpoints-route
-app.post('/',(req,res)=>{
+app.post('/',(req,res)=>{//now these methods are not part of auth middleware as we removed app.use() and applied auth on get request only.
     res.json({'type':'Post'});
 });
 app.put('/',(req,res)=>{
