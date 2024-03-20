@@ -1,3 +1,6 @@
+const controller=require('../controller/product');
+console.log(controller);
+
 const express=require('express');
 
 const app=express();
@@ -10,6 +13,9 @@ const data4=JSON.parse(data3);
 console.log("data4", data4);//JSON Object
 const dataArr=[data4];//Conversion of object to array
 console.log('DataArr',dataArr);
+exports.dataArr=dataArr;
+
+
 //app.use() will execute before every request.
 //Creation of middleware between client and server.
 /**app.use((req,res,next)=>{
@@ -96,68 +102,23 @@ app.get('/form/:id',(req,res)=>{//To get the url variable
 
 //CRUD operation in REST API
 
-const createProduct=(req,res)=>{
-    console.log(req.body);
-    dataArr.push(req.body);
-    console.log("Json dataArr Data is coming up");
-    console.log(dataArr);
-        res.json({"type":"Post"});
-    }
 
-const getProduct=(req,res)=>{
-    res.json(dataArr);
-}
-
-const replaceProduct=(req,res)=>{
-    //PUT
-    const id=parseInt(req.params['id']);
-    console.log("id",id);
-   const index=dataArr.findIndex((i)=>i.id===id);
-    console.log(index);
-dataArr.splice(index,1,{...req.body,'id':id});
-res.status(201).json(dataArr);
-
-
-}
-
-const updateProduct=(req,res)=>{
-    //PATCH
-    const id=parseInt(req.params['id']);
-    console.log("id",id);
-   const index=dataArr.findIndex((i)=>i.id===id);
-    console.log(index);
-    const element=dataArr[index];
-dataArr.splice(index,1,{...element,...req.body});//here properties which repeats in element by req.body will be override
-res.status(201).json(dataArr);
-
-
-}
-const deleteProduct=(req,res)=>{
-    const id=parseInt(req.params['id']);
-    console.log(req.params);
-    console.log("id",id);
-   const index=dataArr.findIndex((i)=>i.id===id);
-    console.log(index);
-    dataArr.splice(index,1);
-    res.status(201).send('Deleted');
-}
 //Creation of REST API
 
-app.post('/products',createProduct);
+app.post('/products',controller.createProduct);
 
 //Get Request
-app.get('/products/view',getProduct);
+app.get('/products/view',controller.getProduct);
 
 //Update Request
-app.put('/products/:id',replaceProduct)
+app.put('/products/:id',controller.replaceProduct)
 //The only difference between put and patch is put override all the element but patch updates the selected and also keep the
 //old values or properties.
-app.patch('/products/:id', updateProduct)
+app.patch('/products/:id', controller.updateProduct)
 
 //DELETE
 
-app.delete('/products/:id', deleteProduct);
-
+app.delete('/products/:id', controller.deleteProduct);
 
 
 //app.listen should be at the end.
