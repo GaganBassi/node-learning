@@ -4,6 +4,12 @@ const app=express();
 
 const fs=require('fs');
 const data2=fs.readFileSync('index.html','utf-8');
+
+const data3=fs.readFileSync('../data.json','utf-8');
+const data4=JSON.parse(data3);
+console.log("data4", data4);//JSON Object
+const dataArr=[data4];//Conversion of object to array
+console.log('DataArr',dataArr);
 //app.use() will execute before every request.
 //Creation of middleware between client and server.
 /**app.use((req,res,next)=>{
@@ -86,7 +92,21 @@ app.get('/form/:id',(req,res)=>{//To get the url variable
     console.log(req.params);
     res.send(req.params);
     })
+
+
+//CRUD operation in REST API
+
+//Creation of REST API
+
+app.post('/products',(req,res)=>{
+console.log(req.body);
+dataArr.push(req.body);
+console.log("Json dataArr Data is coming up");
+console.log(dataArr);
+    res.json({"type":"Post"});
+})
+
 //app.listen should be at the end.
-app.listen(8001,()=>{
+app.listen(8007,()=>{
     console.log('Server Started');
 });
