@@ -17,7 +17,7 @@ exports.dataArr=dataArr;
 
 //Creation of Router
 
-const productRouter=express.Router();
+//const productRouter=express.Router();
 
 
 
@@ -107,9 +107,11 @@ app.get('/form/:id',(req,res)=>{//To get the url variable
 
 //CRUD operation in REST API
 
-
+const productRouter=require('../routes/product-routes');
+console.log('Product Router',productRouter.routes);
 //Creation of REST API
-app.use('/',productRouter);//Good convention to use instead of app.method
+app.use('/products',productRouter.routes);//to link router with url
+/** 
 //New short cut of creating API's and make sure to remove  semi-colon ; from every API
 productRouter
     .post('/products',controller.createProduct)
@@ -127,7 +129,7 @@ productRouter
 
     .delete('/products/:id', controller.deleteProduct)
 
-
+**/
 //app.listen should be at the end.
 app.listen(8007,()=>{
     console.log('Server Started');
