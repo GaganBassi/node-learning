@@ -18,7 +18,7 @@ exports.dataArr=dataArr;
 //Creation of Router
 
 const productRouter=express.Router();
-app.use('/api',productRouter);//Good convention to use instead of app.method
+
 
 
 //app.use() will execute before every request.
@@ -109,9 +109,9 @@ app.get('/form/:id',(req,res)=>{//To get the url variable
 
 
 //Creation of REST API
-
+app.use('/',productRouter);//Good convention to use instead of app.method
 //New short cut of creating API's and make sure to remove  semi-colon ; from every API
-app
+productRouter
     .post('/products',controller.createProduct)
 
 //Get Request
