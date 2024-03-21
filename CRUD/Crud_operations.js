@@ -1,3 +1,6 @@
+require('dotenv').config();
+console.log('env',process.env.DB_Pass);
+
 const fs=require('fs');
 const path=require('path');
 
