@@ -15,6 +15,11 @@ const dataArr=[data4];//Conversion of object to array
 console.log('DataArr',dataArr);
 exports.dataArr=dataArr;
 
+//Creation of Router
+
+const productRouter=express.Router();
+app.use('/api',productRouter);//Good convention to use instead of app.method
+
 
 //app.use() will execute before every request.
 //Creation of middleware between client and server.
@@ -105,20 +110,22 @@ app.get('/form/:id',(req,res)=>{//To get the url variable
 
 //Creation of REST API
 
-app.post('/products',controller.createProduct);
+//New short cut of creating API's and make sure to remove  semi-colon ; from every API
+app
+    .post('/products',controller.createProduct)
 
 //Get Request
-app.get('/products/view',controller.getProduct);
+    .get('/products/view',controller.getProduct)
 
 //Update Request
-app.put('/products/:id',controller.replaceProduct)
+    .put('/products/:id',controller.replaceProduct)
 //The only difference between put and patch is put override all the element but patch updates the selected and also keep the
 //old values or properties.
-app.patch('/products/:id', controller.updateProduct)
+    .patch('/products/:id', controller.updateProduct)
 
 //DELETE
 
-app.delete('/products/:id', controller.deleteProduct);
+    .delete('/products/:id', controller.deleteProduct)
 
 
 //app.listen should be at the end.
