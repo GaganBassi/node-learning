@@ -1,3 +1,7 @@
+
+const mongoose=require('mongoose');
+const { Schema } = mongoose;
+
 const controller=require('../controller/product');
 console.log(controller);
 
@@ -14,6 +18,43 @@ console.log("data4", data4);//JSON Object
 const dataArr=[data4];//Conversion of object to array
 console.log('DataArr',dataArr);
 exports.dataArr=dataArr;
+
+//Schema
+/**const productSchema = new Schema({
+    title: String, // String is shorthand for {type: String}
+    description: String,
+    price:Number,
+    discountPercentage:Number,
+    rating:Number,
+    brand:String,
+    category:String,
+    thumbnail:String,
+    images:[String]//array of string
+   
+    
+  });**/
+
+//Creation of Model
+
+//const Product = mongoose.model('productCollection', productSchema);//collection which follows productSchema 
+//productCollection collection name in a database
+//Product is a model and it will be useful in operating CRUD operations.
+
+
+
+///Mongoose Connection
+
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect('mongodb://127.0.0.1:27017/ecommerce');
+
+
+  // use `await mongoose.connect('mongodb://user:password@127.0.0.1:27017/test');` if your database has auth enabled
+
+  console.log("Database connected");
+}
+
 
 //Creation of Router
 

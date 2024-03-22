@@ -1,3 +1,7 @@
+
+const model=require('../model/product-model');
+const Product=model.Product;
+
 //copy paste all the logics related to product from express/server.js
 
 //const dataArr=require('../express/server.js');
@@ -9,11 +13,20 @@ const data4=JSON.parse(data3);
 console.log("data4", data4);//JSON Object
 const dataArr=[data4];//Conversion of object to array
 console.log('DataArr',dataArr);
-const createProduct=(req,res)=>{
-    console.log(req.body);
-    dataArr.push(req.body);
-    console.log("Json dataArr Data is coming up");
-    console.log(dataArr);
+const createProduct= (req,res)=>{
+
+    const product=new Product();
+    product.title='Iphone';
+    product.price=9999;
+    product.ratings=5;
+    //console.log(req.body);
+    //dataArr.push(req.body);
+    //console.log("Json dataArr Data is coming up");
+    //console.log(dataArr);
+    product.save((err,data)=>{
+        console.log("Data is coming",data);
+    });
+    //console.log(data);
         res.json({"type":"Post"});
     }
 
