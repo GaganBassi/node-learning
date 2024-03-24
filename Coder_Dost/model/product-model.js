@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 
 
 const productSchema = new Schema({
-    title: String, // String is shorthand for {type: String}
+    title: {type:String,required:[true,'Missing title'], unique:true}, // String is shorthand for {type: String}
     description: String,
     price:Number,
     discountPercentage:Number,
-    rating:Number,
+    rating:{type:Number,min:[0,'Wrong Rating'], max:5, required:true},//Validation
     brand:String,
     category:String,
     thumbnail:String,

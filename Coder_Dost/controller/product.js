@@ -14,6 +14,7 @@ console.log("data4", data4);//JSON Object
 const dataArr=[data4];//Conversion of object to array
 console.log('DataArr',dataArr);
 
+//Create
 const createProduct= async (req,res)=>{
 
     //const product=new Product({title:'Iphone12345','price':123});
