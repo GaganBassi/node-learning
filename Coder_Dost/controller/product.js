@@ -16,7 +16,11 @@ console.log('DataArr',dataArr);
 
 const createProduct= async (req,res)=>{
 
-    const product=new Product({title:'Iphone12345','price':123});
+    //const product=new Product({title:'Iphone12345','price':123});
+
+    //Sending data from req.body() in post request
+
+    const product=new Product(req.body);
    // product.title='Iphone12345';
     //product.price=9999;
     //product.ratings=5;
@@ -32,7 +36,7 @@ const createProduct= async (req,res)=>{
    // await Product.create({'title':'Iphone098765321'});//One way of insert query
    //await Product.insertMany([{},{}])//This will work.
 
-   
+
     await product.save();
         res.json({"type":"Post123"});
         
