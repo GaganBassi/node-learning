@@ -13,22 +13,31 @@ const data4=JSON.parse(data3);
 console.log("data4", data4);//JSON Object
 const dataArr=[data4];//Conversion of object to array
 console.log('DataArr',dataArr);
-const createProduct= (req,res)=>{
 
-    const product=new Product();
-    product.title='Iphone';
-    product.price=9999;
-    product.ratings=5;
+const createProduct= async (req,res)=>{
+
+    const product=new Product({title:'Iphone12345','price':123});
+   // product.title='Iphone12345';
+    //product.price=9999;
+    //product.ratings=5;
     //console.log(req.body);
     //dataArr.push(req.body);
     //console.log("Json dataArr Data is coming up");
     //console.log(dataArr);
-    product.save((err,data)=>{
+   /**  product.save((err,data)=>{
         console.log("Data is coming",data);
     });
-    //console.log(data);
-        res.json({"type":"Post"});
+    //console.log(data);**/
+    await product.save();//Another way of insert query
+   // await Product.create({'title':'Iphone098765321'});//One way of insert query
+   //await Product.insertMany([{},{}])//This will work.
+
+   
+    await product.save();
+        res.json({"type":"Post123"});
+        
     }
+   
 
 const getProduct=(req,res)=>{
     res.json(dataArr);
